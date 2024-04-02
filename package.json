@@ -2,13 +2,16 @@
   "name": "weather-app",
   "version": "1.0.0",
   "description": "Exercise about views with pug",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev":"nodemon index.js"
   },
   "author": "Vanesa Edo",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.4.5",
     "ejs": "^3.1.9",
     "express": "^4.19.2",
     "request": "^2.88.2"

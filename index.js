@@ -1,10 +1,11 @@
 const express = require('express')
+require('dotenv').config();
 const app = express()
 //const bodyParser = require('body-parser'); Esta línea ya no es necesaria (antigua versión del código)
 const request = require('request');
 
 
-const apiKey = '**';
+const apiKey = process.env.API_KEY
 
 app.use(express.static('public'));//con esta línea se publican los estilos css en el navegador
 app.use(express.urlencoded({ extended: true }));//sin esta línea no se interpreta el action en form
