@@ -1,13 +1,13 @@
 const express = require('express')
 const app = express()
-const bodyParser = require('body-parser');
+//const bodyParser = require('body-parser'); Esta línea ya no es necesaria (antigua versión del código)
 const request = require('request');
 
 
 const apiKey = 'edcc4e9a432c54888d2969d9cfcde954';
 
-app.use(express.static('public'));
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static('public'));//con esta línea se publican los estilos css en el navegador
+app.use(express.urlencoded({ extended: true }));//sin esta línea no se interpreta el action en form
 app.set('view engine', 'ejs')
 
 app.get('/', function (req, res) {
@@ -20,7 +20,7 @@ app.get('/', function (req, res) {
 
 
 app.post('/', function (req, res) {
-    let city = req.body.city;
+    let city = req.body.city;//city es el name del input
     let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`
 
   request(url, function (err, response, body) {
@@ -31,7 +31,7 @@ app.post('/', function (req, res) {
         if(weather.main == undefined){
           res.render('index', {weather: null, error: 'Error, please try again'});
         } else {
-          let weatherText = `It's ${weather.main.temp} degrees in ${weather.name}!`;
+          let weatherText = `It's ${Math.round((weather.main.temp - 32)* 5/9)} degrees in ${weather.name}!`;
           res.render('index', {weather: weatherText, error: null});
         }
       }
